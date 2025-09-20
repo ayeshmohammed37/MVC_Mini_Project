@@ -1,0 +1,30 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebApplication1.Models
+{
+    public class Department
+    {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+
+        public string Name { get; set; }
+
+        public string? MgrName { get; set; }
+
+
+        // Navigation Properties
+        [ForeignKey(nameof(MgrName))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public virtual Instructor Instructor { get; set; }
+
+        public virtual List<Course>? Courses { get; set; }
+
+        public virtual List<Student>? Students { get; set; }
+
+
+    }
+}
