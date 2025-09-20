@@ -1,0 +1,35 @@
+﻿@model Student
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Student Profile</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <tbody>
+
+                    <tr class="table-light">
+                        <th colspan="2"><h5>Personal Information</h5></th>
+                    </tr>
+                    <tr>
+                        <th style="width: 25%;">Full Name</th>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <th>Student ID</th>
+                        <td>@Model.ID</td>
+                    </tr>
+                    <tr>
+                        <th>Student Department</th>
+                        <td>@Model.Department.Name</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-end">
+                <a href="#" class="btn btn-secondary">Back to List</a>
+                <a href="#" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
