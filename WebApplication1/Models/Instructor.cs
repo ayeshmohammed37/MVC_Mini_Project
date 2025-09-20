@@ -6,6 +6,24 @@ namespace WebApplication1.Models
 {
     public class Instructor
     {
+        public Instructor()
+        {
+            Departments = null;
+            Course = null;
+        }
+
+        public Instructor(int iD, string name, decimal salary, string address, int? courseID)
+        {
+            ID = iD;
+            Name = name;
+            Salary = salary;
+            Address = address;
+            CourseID = courseID;
+
+            Departments = null;
+            Course = null;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }

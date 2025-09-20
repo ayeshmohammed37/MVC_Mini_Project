@@ -6,6 +6,23 @@ namespace WebApplication1.Models
 {
     public class Department
     {
+        public Department()
+        {
+            Instructor = null;
+            Courses = null;
+            Students = null;
+        }
+
+        public Department(int iD, string name, string? mgrName)
+        {
+            ID = iD;
+            Name = name;
+            MgrName = mgrName;
+
+            Instructor = null;
+            Courses = null;
+            Students = null;
+        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

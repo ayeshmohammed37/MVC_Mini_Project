@@ -1,10 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class StuCrsRes
     {
+        public StuCrsRes(int iD, int courseID, int studentID, int grade)
+        {
+            ID = iD;
+            CourseID = courseID;
+            StudentID = studentID;
+            Grade = grade;
+            Course = null;
+            Student = null;
+        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -17,8 +27,12 @@ namespace WebApplication1.Models
 
         public int Grade { get; set; }
 
-        public virtual Course Course { get; set; }
+        [ForeignKey(nameof(CourseID))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public virtual Course? Course { get; set; }
 
-        public virtual Student Student { get; set; }
+        [ForeignKey(nameof(StudentID))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public virtual Student? Student { get; set; }
     }
 }
