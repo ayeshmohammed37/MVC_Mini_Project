@@ -6,6 +6,11 @@ namespace WebApplication1.Models
 {
     public class StuCrsRes
     {
+        public StuCrsRes()
+        {
+            Course = null;
+            Student = null;
+        }
         public StuCrsRes(int iD, int courseID, int studentID, int grade)
         {
             ID = iD;

@@ -1,3 +1,5 @@
+using WebApplication1.Data;
+
 namespace WebApplication1
 {
     public class Program
@@ -10,6 +12,16 @@ namespace WebApplication1
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+
+            // Seed the Database
+            using (DemoDbContext demo = new DemoDbContext())
+            {
+                demo.Database.EnsureCreated();
+                Initialize.SeedData(demo);
+            }
+            // <<< --------------------------------------------- >>>
+            
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
