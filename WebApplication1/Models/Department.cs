@@ -13,7 +13,7 @@ namespace WebApplication1.Models
             Students = null;
         }
 
-        public Department(int iD, string name, string? mgrName)
+        public Department(int iD, string name, int? mgrName)
         {
             ID = iD;
             Name = name;
@@ -30,7 +30,7 @@ namespace WebApplication1.Models
 
         public string Name { get; set; }
 
-        public string? MgrName { get; set; }
+        public int? MgrName { get; set; }
 
 
         // Navigation Properties
