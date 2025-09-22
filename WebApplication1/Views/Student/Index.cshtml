@@ -1,45 +1,99 @@
-﻿@model List<Student>
+﻿
+
+@model List<Student>
 
 
+<style>
+    /*     :root {
+      font-family: sans-serif;
+      padding: 3rem;
+    } */
 
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">Student List</h4>
-            <a href="#" class="btn btn-light"><i class="bi bi-plus-circle-fill me-2"></i>Add New Student</a>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover text-center align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Student ID</th>
-                            <th>Full Name</th>
-                            <th>Department</th>
-                            <th>Level</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.ID</td>
-                                <td>@item.Name</td>
-                                <td>@item.Department.Name</td>
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a href="#" class="btn btn-info btn-sm" title="Details"><i class="bi bi-eye"></i></a>
-                                        <a href="#" class="btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                        <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    .table-wrapper {
+      /* position: relative; */
+      border-radius: 0.5rem;
+      /* overflow: hidden; */
+
+      /* &::after {
+        --shadow-size: 20px;
+        content: "";
+        position: absolute;
+        inset: 0;
+        box-shadow: inset 0 calc(var(--shadow-size) * -1) var(--shadow-size) calc(var(--shadow-size) * -1) rgb(0 0 0 / 0.35);
+        pointer-events: none;
+      } */
+    }
+
+    .table-container {
+      max-height: 24rem;
+      /* overflow: auto; */
+      height: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate; /* make border sticky */
+    }
+
+    th,
+    td {
+      border: none;
+      padding: 1rem 2rem;
+      text-align: left;
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+
+    th {
+      background-color: #d0f0ee;
+      color: #15928a;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      border-bottom: 2px solid #15928a;
+    }
+
+    tbody {
+      tr:nth-of-type(even) {
+        background-color: hsl(0 0 95);
+      }
+    }
+
+</style>
+
+
+<div class="table-wrapper">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th></th>
+                    @* <th></th> *@
+                    @* <th></th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Name</td>
+                        <td>@item.Age</td>
+                        <td>@item.Department.Name</td>
+                        <td>
+                            <a href="Student/Details?@item.ID">Details</a>
+                            <a href="Student/Edit?@item.ID">Edit</a>
+                            <a href="Student/Delete?@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
