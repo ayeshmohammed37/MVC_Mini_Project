@@ -14,12 +14,7 @@ namespace WebApplication1
             var app = builder.Build();
 
 
-            // Seed the Database
-            using (DemoDbContext demo = new DemoDbContext())
-            {
-                demo.Database.EnsureCreated();
-                Initialize.SeedData(demo);
-            }
+            
             // <<< --------------------------------------------- >>>
             
 
