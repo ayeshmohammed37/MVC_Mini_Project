@@ -12,11 +12,9 @@ namespace WebApplication1.Models.DepartmentModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DepartmentID { get; set; }
-
         public string Name { get; set; }
         public string DepartmentCode { get; set; }
         public DateTime StartDate { get; set; }
-
         public int? DepartmentHeadID { get; set; }
 
         //Navigation Properties
@@ -25,8 +23,6 @@ namespace WebApplication1.Models.DepartmentModel
         [ForeignKey(nameof(DepartmentHeadID))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
         public virtual Staff? DepartmentHead { get; set; } = null;
-
-
         public virtual List<DepartmentCourse>? DepartmentCourses { get; set; } = new List<DepartmentCourse>();
 
 

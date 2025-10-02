@@ -11,12 +11,11 @@ namespace WebApplication1.Models.DepartmentCourseModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int DepartmentCourseID { get; set; }
-
         [Required]  
         public int DepartmentID { get; set; }
-
         [Required]
         public int CourseID { get; set; }
+
 
         [ForeignKey(nameof(DepartmentID))]
         [DeleteBehavior(DeleteBehavior.Cascade)]
