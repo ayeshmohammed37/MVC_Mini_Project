@@ -33,23 +33,6 @@ namespace WebApplication1.Data
             base.OnConfiguring(optionsBuilder);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-            modelBuilder.Entity<Person>().UseTpcMappingStrategy();
-            //modelBuilder.Entity<Student>().ToTable("Students");
-            //modelBuilder.Entity<Staff>().ToTable("Staffs");
-            //modelBuilder.Entity<Administrator>().ToTable("Administrators");
-
-            //modelBuilder.Entity<Course>(course =>
-            //{
-            //    course.HasMany(c => c.Prerequisites)
-            //    .WithMany(c => c.IsPrerequisiteFor);
-            //});
-
-
-
-            base.OnModelCreating(modelBuilder);
-        }
+        
     }
 }
