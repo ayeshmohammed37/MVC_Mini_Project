@@ -12,7 +12,7 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    [Migration("20250928085532_init")]
+    [Migration("20251002040135_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -38,6 +38,81 @@ namespace WebApplication1.Migrations
                     b.HasIndex("StaffsID");
 
                     b.ToTable("CourseStaff");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.AdministratorModel.Administrator", b =>
+                {
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomeTele")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MailBox")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Administrators");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.CourseGradeModel.CourseGrade", b =>
@@ -147,7 +222,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Shared.Person", b =>
+            modelBuilder.Entity("WebApplication1.Models.StaffModel.Staff", b =>
                 {
                     b.Property<int>("ID")
                         .HasColumnType("int");
@@ -156,8 +231,8 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("BirthPlace")
                         .IsRequired()
@@ -168,6 +243,10 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Degree")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -217,51 +296,99 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OfficeLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
-
-                    b.ToTable((string)null);
-
-                    b.UseTpcMappingStrategy();
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.AdministratorModel.Administrator", b =>
-                {
-                    b.HasBaseType("WebApplication1.Models.Shared.Person");
-
-                    b.ToTable("Administrators");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.StaffModel.Staff", b =>
-                {
-                    b.HasBaseType("WebApplication1.Models.Shared.Person");
-
-                    b.Property<string>("Degree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Office")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.StudentModel.Student", b =>
                 {
-                    b.HasBaseType("WebApplication1.Models.Shared.Person");
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AddvisorID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DepartmentID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomeTele")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StaffID")
-                        .HasColumnType("int");
+                    b.Property<string>("MailBox")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AddvisorID");
 
                     b.HasIndex("DepartmentID");
-
-                    b.HasIndex("StaffID");
 
                     b.ToTable("Students");
                 });
@@ -331,14 +458,14 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.StudentModel.Student", b =>
                 {
+                    b.HasOne("WebApplication1.Models.StaffModel.Staff", "Advisor")
+                        .WithMany("Students")
+                        .HasForeignKey("AddvisorID")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("WebApplication1.Models.DepartmentModel.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("DepartmentID")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("WebApplication1.Models.StaffModel.Staff", "Advisor")
-                        .WithMany("Students")
-                        .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Advisor");

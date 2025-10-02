@@ -24,7 +24,7 @@ namespace WebApplication1.Migrations
                     IDNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -69,7 +69,7 @@ namespace WebApplication1.Migrations
                     IDNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -79,7 +79,7 @@ namespace WebApplication1.Migrations
                     Fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MailBox = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Office = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OfficeLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,11 +164,12 @@ namespace WebApplication1.Migrations
                     MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
                     Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IDNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -177,9 +178,8 @@ namespace WebApplication1.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MailBox = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
                     DepartmentID = table.Column<int>(type: "int", nullable: true),
-                    StaffID = table.Column<int>(type: "int", nullable: true)
+                    AddvisorID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,8 +190,8 @@ namespace WebApplication1.Migrations
                         principalTable: "Departments",
                         principalColumn: "DepartmentID");
                     table.ForeignKey(
-                        name: "FK_Students_Staffs_StaffID",
-                        column: x => x.StaffID,
+                        name: "FK_Students_Staffs_AddvisorID",
+                        column: x => x.AddvisorID,
                         principalTable: "Staffs",
                         principalColumn: "ID");
                 });
@@ -255,14 +255,14 @@ namespace WebApplication1.Migrations
                 filter: "[DepartmentHeadID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Students_AddvisorID",
+                table: "Students",
+                column: "AddvisorID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_DepartmentID",
                 table: "Students",
                 column: "DepartmentID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_StaffID",
-                table: "Students",
-                column: "StaffID");
         }
 
         /// <inheritdoc />
