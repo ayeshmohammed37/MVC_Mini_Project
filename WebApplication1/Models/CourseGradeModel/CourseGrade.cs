@@ -11,7 +11,9 @@ namespace WebApplication1.Models.CourseGradeModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CourseGradeID { get; set; }
-        public Grade Grade { get; set; }
+        public int Grade { get; set; }
+        //public Grade Grade { get; set; }
+
         public DateTime CourseStartDate { get; set; }
         public DateTime CourseEndDate { get; set; }
         [Required]
