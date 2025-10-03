@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Student
+
+@{
+    Layout = "_StudentPortalLayout";
+}
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 24px;
+        gap:24px
+        
+    }
+
+    .personal-info {
+        width: 800px;
+    }
+</style>
+
+<div class="personal-info">
+    <div class="header">Personal Information</div>
+    <div class="personal-data-container">
+        <div class="element">
+            <p>Nmae</p>
+            <p>@Model.FirstName @Model.MiddleName @Model.LastName</p>
+        </div>
+        <div class="element">
+            <p>Code</p>
+            <p>@Model.Code</p>
+        </div>
+        <div class="element">
+            <p>IDNumber</p>
+            <p>@Model.IDNumber</p>
+        </div>
+        <div class="element">
+            <p>Nationality</p>
+            <p>@Model.Nationality</p>
+        </div>
+        <div class="element">
+            <p>BirthDate</p>
+            <p>@Model.BirthDate</p>
+        </div>
+        <div class="element">
+            <p>Birth Place</p>
+            <p>@Model.BirthPlace</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="contact-info">
+
+</div>
+
+<div class="std-progress">
+
+</div>
+
