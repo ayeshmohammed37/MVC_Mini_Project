@@ -37,6 +37,13 @@ namespace WebApplication1.Controllers
             return View(stdEditModel);
         }
 
+        [HttpPost] 
+        public IActionResult SaveEdit(Student student)
+        {
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 
 

@@ -30,21 +30,38 @@ namespace WebApplication1.Models.StudentModel
         public string? Img { get; set; }
         [Display(Name ="ID Number")]
         public string IDNumber { get; set; }
+
         public Gender Gender { get; set; }
+
+        [Display(Name = "Nationality")]
         public string Nationality { get; set; }
 
-        [Display(Name = "Birth Date")]
+        [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+
+        [Display(Name = "Place of Birth (Optional)")]
         public string? BirthPlace { get; set; }
+        [Display(Name = "City (Optional)")]
         public string? City { get; set; }
+
+        [Display(Name = "Address (Optional)")]
         public string? Address { get; set; }
+
+        [Display(Name = "Home Telephone (Optional)")]
         public string? HomeTele { get; set; }
 
         [DataType(DataType.PhoneNumber)]
+        [Display(Name="Mobile Number")]
         public string Mobile { get; set; }
+
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
+
+        [Display(Name = "Fax (Optional)")]
         public string? Fax { get; set; }
+
+        [Display(Name = "Mail Box / P.O. Box (Optional)")]
         public string? MailBox { get; set; }
 
 
