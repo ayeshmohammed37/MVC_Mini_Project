@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Reflection;
 using WebApplication1.Data;
 using WebApplication1.Models.StudentModel;
 using WebApplication1.ViewModels.StudentViewModel;
@@ -16,8 +18,6 @@ namespace WebApplication1.Controllers
             return View(students);
         }
 
-
-
         [HttpGet]
         public IActionResult Details(int id)
         {
@@ -33,15 +33,45 @@ namespace WebApplication1.Controllers
         {
             Student std = context.Students.FirstOrDefault(st => st.ID == id);
 
-            StudentEditModel stdEditModel = new StudentEditModel(std);
-            return View(stdEditModel);
+           
+            return View(std);
         }
 
         [HttpPost] 
-        public IActionResult SaveEdit(Student student)
+        public IActionResult SaveEdit(Student student, int id)
         {
+            if (student != null)
+            {
+                Student std = context.Students.FirstOrDefault(s => s.ID== id);
 
-            return RedirectToAction(nameof(Index));
+                std.FirstName = student.FirstName;
+                std.MiddleName = student.MiddleName;
+                std.LastName = student.LastName;
+                std.Level = student.Level;
+                std.Gender = student.Gender;
+                std.Nationality = student.Nationality;
+                std.BirthDate = student.BirthDate;
+                std.BirthPlace = student.BirthPlace;
+                std.City = student.City;
+                std.Address = student.Address;
+                std.HomeTele = student.HomeTele;
+                std.Mobile = student.Mobile;
+                std.Email = student.Email;
+                std.Fax = student.Fax;
+                std.MailBox = student.MailBox;
+
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Edit", student.ID);
+        }
+
+        public IActionResult DeleteConfirmation(int id)
+        {
+            Student std = context.Students.FirstOrDefault(st => st.ID == id);
+            return View(std);
         }
 
     }

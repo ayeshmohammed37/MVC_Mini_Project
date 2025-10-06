@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
+using System.Reflection;
 using WebApplication1.Models.CourseGradeModel;
 using WebApplication1.Models.DepartmentModel;
 using WebApplication1.Models.Shared;
@@ -10,6 +12,40 @@ namespace WebApplication1.Models.StudentModel
 {
     public class Student
     {
+        public Student()
+        {
+            
+        }
+        public Student(Student std)
+        {
+            ID = std.ID;
+            FirstName = std.FirstName;
+            MiddleName = std.MiddleName;
+            LastName = std.LastName;
+            Code = std.Code;
+            Level = std.Level;
+            Img = std.Img;
+            IDNumber = std.IDNumber;
+            Gender = std.Gender;
+            Nationality = std.Nationality;
+            BirthDate = std.BirthDate;
+            BirthPlace = std.BirthPlace;
+            City = std.City;
+            Address = std.Address;
+            HomeTele = std.HomeTele;
+            Mobile = std.Mobile;
+            Email = std.Email;
+            Fax = std.Fax;
+            MailBox = std.MailBox;
+            DepartmentID = std.DepartmentID;
+            AddvisorID = std.AddvisorID;
+            Department = std.Department;
+            Advisor = std.Advisor;
+            CourseGrades = std.CourseGrades;
+        }
+
+        
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Student ID Number")]

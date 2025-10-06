@@ -4,12 +4,12 @@
 @{
 }
 
-@model StudentEditModel
+@model Student
 
 @{
     Layout = "";
 
-    Student std = Model.Student;
+    SelectList Levels = new SelectList(new List<int>() { 1, 2, 3, 4 });
 }
 
 <!DOCTYPE html>
@@ -234,46 +234,46 @@
 </head>
 <body>
     <header class="page-header">
-        <h1>✏️ Edit Student Profile: @std.FirstName @std.LastName (ID: @std.ID)</h1>
+        <h1>✏️ Edit Student Profile: @Model.FirstName @Model.LastName (ID: @Model.ID)</h1>
         <nav>
-            <a asp-action="Details" asp-controller="StudentPortal" asp-route-Id="@std.ID" class="back-link">
+            <a asp-action="Details" asp-controller="StudentPortal" asp-route-Id="@Model.ID" class="back-link">
                 ⬅️ Cancel & View Details
             </a>
         </nav>
     </header>
 
     <main class="edit-container">
-        <form asp-action="SaveEdit" asp-controller="StudentPortal">
+        <form asp-route-id="@Model.ID" asp-action="SaveEdit" asp-controller="StudentPortal">
 
             <fieldset class="form-section">
                 <legend>Identification & Core Data</legend>
 
                 <div class="form-group required">
-                    <label asp-for="@std.ID"></label>
-                    <input asp-for="@std.ID" id="id-number" name="id-number" value="@std.ID" readonly required>
+                    <label asp-for="ID"></label>
+                    <input asp-for="ID" id="id-number" name="id-number" value="@Model.ID" readonly required>
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.FirstName">First Name</label>
-                    <input asp-for="@std.FirstName"  value="@std?.FirstName" required>
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName"  value="@Model.FirstName" required>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.MiddleName"></label>
-                    <input asp-for="@std.MiddleName"  value="@std?.MiddleName">
+                    <label asp-for="MiddleName"></label>
+                    <input asp-for="MiddleName" value="@Model.MiddleName">
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.LastName">Last Name</label>
-                    <input asp-for="@std.LastName" value="@std?.LastName" required>
+                    <label asp-for="LastName">Last Name</label>
+                    <input asp-for="LastName" value="@Model.LastName" required>
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.Level"></label>
-                    <select asp-items="Model.Levels" asp-for="@std.Level" required>
-                        @if(std.Level > 0)
+                    <label asp-for="Level"></label>
+                    <select asp-items="@Levels" asp-for="Level" required>
+                        @if(Model.Level > 0)
                         {
-                            <option value="@std.Level"> @std.Level</option>
+                            <option value="@Model.Level"> @Model.Level</option>
                         }
                         else
                         {
@@ -288,25 +288,25 @@
                 <legend>Personal Data</legend>
 
                 <div class="form-group required">
-                    <label asp-for="@std.BirthDate"></label>
-                    <input asp-for="@std.BirthDate" value="1999-05-15">
+                    <label asp-for="BirthDate"></label>
+                    <input asp-for="BirthDate" value="1999-05-15">
                     @* <input type="date" id="birthdate" name="birthdate" value="1999-05-15" required> *@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.BirthPlace"></label>
-                    <input asp-for="@std.BirthPlace" value="@std.BirthPlace">
+                    <label asp-for="BirthPlace"></label>
+                    <input asp-for="BirthPlace" value="@Model.BirthPlace">
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.Nationality"></label>
-                    <input asp-for="@std.Nationality" value="@std.Nationality">
+                    <label asp-for="Nationality"></label>
+                    <input asp-for="Nationality" value="@Model.Nationality">
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.Gender"></label>
-                    <select asp-for="@std.Gender">
-                        @if(std.Gender == Gender.Male)
+                    <label asp-for="Gender"></label>
+                    <select asp-for="Gender">
+                        @if(Model.Gender == Gender.Male)
                         {
                             <option value="0" selected>Male</option>
                             <option value="1">Female</option>
@@ -324,38 +324,38 @@
                 <legend>Contact Data</legend>
 
                 <div class="form-group required">
-                    <label asp-for="@std.Mobile"></label>
-                    <input asp-for="@std.Mobile" value="@std.Mobile">
+                    <label asp-for="Mobile"></label>
+                    <input asp-for="Mobile" value="@Model.Mobile">
                 </div>
 
                 <div class="form-group required">
-                    <label asp-for="@std.Email"></label>
-                    <input type="email" asp-for="@std.Email" value="@std.Email">
+                    <label asp-for="Email"></label>
+                    <input type="email" asp-for="Email" value="@Model.Email">
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.HomeTele"></label>
-                    <input type="tel" asp-for="@std.HomeTele" value="@std.HomeTele">
+                    <label asp-for="HomeTele"></label>
+                    <input type="tel" asp-for="HomeTele" value="@Model.HomeTele">
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.Address"></label>
-                    <input type="text" asp-for="@std.Address" value="@std.Address">
+                    <label asp-for="Address"></label>
+                    <input type="text" asp-for="Address" value="@Model.Address">
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.City"></label>
-                    <input asp-for="@std.City">
+                    <label asp-for="City"></label>
+                    <input asp-for="City">
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.Fax"></label>
-                    <input type="tel" asp-for="@std.Fax" value="">
+                    <label asp-for="Fax"></label>
+                    <input type="tel" asp-for="Fax" value="">
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@std.MailBox"></label>
-                    <input asp-for="@std.MailBox" value="@std.MailBox">
+                    <label asp-for="MailBox"></label>
+                    <input asp-for="MailBox" value="@Model.MailBox">
                 </div>
             </fieldset>
 
@@ -366,7 +366,7 @@
 
                 <button type="submit" class="save-button">💾 Save Changes</button>
 
-                <button asp-action="Edit" asp-controller="StudentPortal" asp-route-id="@std.ID" type="reset" class="reset-button">
+                <button asp-action="Edit" asp-controller="StudentPortal" asp-route-id="@Model.ID" type="reset" class="reset-button">
                     🔄 Reset Form
                 </button>
             </div>
