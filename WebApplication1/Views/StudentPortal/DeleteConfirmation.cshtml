@@ -9,3 +9,184 @@
     Layout = "";
 }
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Confirmation</title>
+    @* <link rel="stylesheet" href="delete-style.css"> *@
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .delete-container {
+            max-width: 550px;
+            width: 90%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #dc3545; /* Red accent for danger */
+        }
+
+        /* --- Header & Warning --- */
+        .delete-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .warning-title {
+            color: #dc3545; /* Red */
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .warning-message {
+            color: #6c757d;
+            font-size: 1.1em;
+            line-height: 1.4;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* --- Student Info Summary --- */
+        .student-info-summary {
+            background-color: #fff3f4; /* Very light red background */
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+            .student-info-summary h2 {
+                color: #495057;
+                font-size: 1.2em;
+                margin-top: 0;
+                margin-bottom: 15px;
+                padding-bottom: 5px;
+                border-bottom: 1px dashed #f5c6cb;
+            }
+
+        .data-group {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 1em;
+        }
+
+            .data-group label {
+                font-weight: 600;
+                color: #495057;
+            }
+
+            .data-group .value {
+                color: #333;
+            }
+
+
+        /* --- Action Buttons --- */
+        .confirmation-form {
+            text-align: center;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* For the Cancel link */
+            text-align: center;
+            flex-grow: 1; /* Makes buttons grow equally */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .delete-btn {
+            background-color: #dc3545; /* Red for Delete */
+            color: white;
+        }
+
+            .delete-btn:hover {
+                background-color: #c82333;
+                transform: translateY(-2px);
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            }
+
+        .cancel-btn {
+            background-color: #6c757d; /* Grey for Cancel */
+            color: white;
+        }
+
+            .cancel-btn:hover {
+                background-color: #5a6268;
+                transform: translateY(-2px);
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+</head>
+<body>
+    <div class="delete-container">
+
+        <header class="delete-header">
+            <h1 class="warning-title">⚠️ Confirm Deletion</h1>
+            <p class="warning-message">
+                Are you absolutely sure you want to delete this student record? This action cannot be undone.
+            </p>
+        </header>
+
+        <section class="student-info-summary">
+            <h2>Student Details</h2>
+            <div class="data-group">
+                <label>Student ID:</label>
+                <span class="value">@Model.ID</span>
+            </div>
+            <div class="data-group">
+                <label>Full Name:</label>
+                <span class="value">@Model.FirstName @Model.MiddleName @Model.LastName</span>
+            </div>
+            <div class="data-group">
+                <label>Academic Level:</label>
+                <span class="value">Level @Model.Level</span>
+            </div>
+            <div class="data-group">
+                <label>Department:</label>
+                <span class="value">@Model.Department.Name</span>
+            </div>
+            <div class="data-group">
+                <label>Date of Birth:</label>
+                <span class="value">@Model.BirthDate.ToShortDateString()</span>
+            </div>
+        </section>
+
+        <form asp-route-id="@Model.ID" asp-action="Delete" asp-controller="StudentPortal" class="confirmation-form">
+            <div class="form-actions">
+                <button type="submit" class="btn delete-btn">
+                    🗑️ Yes, Delete
+                </button>
+
+                <a asp-action="Index" asp-controller="StudentPortal" class="btn cancel-btn">
+                    ❌ No, Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

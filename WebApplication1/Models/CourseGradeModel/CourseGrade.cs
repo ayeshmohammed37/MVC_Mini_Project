@@ -23,11 +23,11 @@ namespace WebApplication1.Models.CourseGradeModel
 
         //Navigation Properties
         [ForeignKey(nameof(StudentID))]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
+        [DeleteBehavior(DeleteBehavior.Cascade)]
         public virtual Student Student { get; set; }
 
         [ForeignKey(nameof(CourseID))]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
+        [DeleteBehavior(DeleteBehavior.Cascade)]
         public virtual Course Course { get; set; } 
     }
 }

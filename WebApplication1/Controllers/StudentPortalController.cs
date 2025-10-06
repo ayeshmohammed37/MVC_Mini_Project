@@ -68,10 +68,21 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Edit", student.ID);
         }
 
+        [HttpGet]
         public IActionResult DeleteConfirmation(int id)
         {
             Student std = context.Students.FirstOrDefault(st => st.ID == id);
+            context.Entry<Student>(std).Reference(s => s.Department).Load();
             return View(std);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Student std = context.Students.FirstOrDefault(s => s.ID == id);
+            context.Students.Remove(std);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
