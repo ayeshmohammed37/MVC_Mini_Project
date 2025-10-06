@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models.StudentModel;
+using WebApplication1.ViewModels.StudentViewModel;
 
 namespace WebApplication1.Controllers
 {
@@ -32,7 +33,8 @@ namespace WebApplication1.Controllers
         {
             Student std = context.Students.FirstOrDefault(st => st.ID == id);
 
-            return View(std);
+            StudentEditModel stdEditModel = new StudentEditModel(std);
+            return View(stdEditModel);
         }
 
     }
