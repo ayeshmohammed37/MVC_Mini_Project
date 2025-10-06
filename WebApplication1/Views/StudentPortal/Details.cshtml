@@ -1,0 +1,223 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    Layout = "";
+}
+
+@model Student
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - [Student Name]</title>
+    @* <link rel="stylesheet" href="details-style.css"> *@
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e9f0f7; /* Light background */
+            color: #333;
+        }
+
+        /* --- Header & Navigation --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 3px solid #007bff;
+            margin-bottom: 20px;
+        }
+
+            .page-header h1 {
+                color: #0056b3;
+                font-size: 1.8em;
+                margin: 0;
+            }
+
+        .back-link {
+            text-decoration: none;
+            color: #007bff;
+            padding: 8px 15px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .back-link:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        /* --- Main Details Container --- */
+        .details-container {
+            display: grid;
+            /* Arranges the cards in two columns on larger screens */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Info Cards --- */
+        .info-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #007bff; /* Accent color */
+        }
+
+            .info-card h2 {
+                color: #007bff;
+                border-bottom: 2px solid #f0f0f0;
+                padding-bottom: 10px;
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-size: 1.4em;
+            }
+
+        .data-group {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dotted #eee;
+        }
+
+            .data-group:last-child {
+                border-bottom: none;
+            }
+
+            .data-group label {
+                font-weight: 600;
+                color: #555;
+            }
+
+            .data-group .value {
+                color: #333;
+                text-align: right;
+            }
+
+        /* --- Footer Actions --- */
+        .action-footer {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            border-top: 2px solid #ccc;
+            gap: 30px;
+        }
+
+        .footer-link {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .footer-link:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+        .edit-link {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+            .edit-link:hover {
+                background-color: #e0a800;
+            }
+
+        .grades-link {
+            background-color: #28a745;
+            color: white;
+        }
+
+            .grades-link:hover {
+                background-color: #1e7e34;
+            }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1>👤 Student Details: @Model.FirstName @Model.MiddleName @Model.LastName (ID: @Model.ID)</h1>
+        <nav>
+            <a asp-action="Index" asp-controller="StudentPortal" class="back-link">⬅️ Back to Student List</a>
+        </nav>
+    </header>
+
+    <main class="details-container">
+
+        <section class="info-card personal-info">
+            <h2>Personal Information</h2>
+            <div class="data-group">
+                <label>Full Name:</label>
+                <span class="value">@Model.FirstName @Model.MiddleName @Model.LastName</span>
+            </div>
+            <div class="data-group">
+                <label>Student Code:</label>
+                <span class="value">@Model.Code</span>
+            </div>
+            <div class="data-group">
+                <label>Date of Birth:</label>
+                <span class="value">@Model.BirthDate.Year/@Model.BirthDate.Month/@Model.BirthDate.Day</span>
+            </div>
+            <div class="data-group">
+                <label>Gender:</label>
+                <span class="value">@Model.Gender</span>
+            </div>
+        </section>
+
+        <section class="info-card academic-data">
+            <h2>Academic Data</h2>
+            <div class="data-group">
+                <label>Level:</label>
+                <span class="value">@Model.Level</span>
+            </div>
+            <div class="data-group">
+                <label>Department:</label>
+                <span class="value">@Model.Department.Name (@Model.Department.DepartmentCode)</span>
+            </div>
+            @* <div class="data-group">
+                <label>GPA (Cumulative):</label>
+                <span class="value">3.52</span>
+            </div> *@
+            <div class="data-group">
+                <label>Advisor Name:</label>
+                <span class="value">@Model.Advisor.FirstName @Model.Advisor.LastName</span>
+            </div>
+        </section>
+
+        <section class="info-card contact-data">
+            <h2>Contact Data</h2>
+            <div class="data-group">
+                <label>Email:</label>
+                <span class="value">@Model.Email</span>
+            </div>
+            <div class="data-group">
+                <label>Phone:</label>
+                <span class="value">@Model.Mobile</span>
+            </div>
+            <div class="data-group">
+                <label>Address:</label>
+                <span class="value">@Model.Address</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="action-footer">
+        <a asp-action="Edit" asp-controller="StudentPortal" asp-route-Id="@Model.ID" class="footer-link edit-link">
+            ✏️ Edit Student Profile
+        </a>
+        <a href="/grades/1001" class="footer-link grades-link">📜 View Courses & Grades</a>
+    </footer>
+</body>
+</html>
