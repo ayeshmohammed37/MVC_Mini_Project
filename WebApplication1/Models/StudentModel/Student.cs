@@ -13,20 +13,32 @@ namespace WebApplication1.Models.StudentModel
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
+
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Middle Name")]
         public string? MiddleName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Code { get; set; }
         public int Level { get; set; }
         public string? Img { get; set; }
+        [Display(Name ="ID Number")]
         public string IDNumber { get; set; }
         public Gender Gender { get; set; }
         public string Nationality { get; set; }
+
+        [Display(Name = "Birth Date")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public string? BirthPlace { get; set; }
         public string? City { get; set; }
         public string? Address { get; set; }
         public string? HomeTele { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string? Fax { get; set; }

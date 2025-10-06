@@ -11,19 +11,17 @@ namespace WebApplication1.Controllers
         DemoContext context = new DemoContext();
         public IActionResult Index()
         {
-            var students = context.Students.Include(std => std.Department).ToList();
+            List<Student> students = context.Students.Include(std => std.Department).ToList();
             return View(students);
         }
 
         public IActionResult Details(int id)
         {
-            Student std = context.Students
-                .FirstOrDefault(std => std.ID == id);
-            //context.Entry<Student>(std).Reference(s => s.Department).Load();
-            //context.Entry<Student>(std).Reference(s => s.Advisor).Load();
-            //context.Entry<Student>(std).Collection(s => s.CourseGrades).Load();
 
-            return View(std);
-        }
+            return View();
+        } 
+
     }
+
+
 }
