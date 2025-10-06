@@ -12,17 +12,20 @@ namespace WebApplication1.Models.StudentModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Student ID Number")]
         public int ID { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Middle Name")]
+        [Display(Name = "Middle Name (Optional)")]
         public string? MiddleName { get; set; }
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Code { get; set; }
+
+        [Display(Name = "Academic Level")]
         public int Level { get; set; }
         public string? Img { get; set; }
         [Display(Name ="ID Number")]

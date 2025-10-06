@@ -16,7 +16,8 @@ namespace WebApplication1.Controllers
         }
 
 
-        
+
+        [HttpGet]
         public IActionResult Details(int id)
         {
             Student std = context.Students.FirstOrDefault(st => st.ID == id);
@@ -24,7 +25,15 @@ namespace WebApplication1.Controllers
             context.Entry<Student>(std).Reference(st => st.Advisor).Load();
 
             return View(std);
-        } 
+        }
+
+        [HttpGet] 
+        public IActionResult Edit(int id)
+        {
+            Student std = context.Students.FirstOrDefault(st => st.ID == id);
+
+            return View(std);
+        }
 
     }
 
