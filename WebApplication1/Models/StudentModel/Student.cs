@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
@@ -59,6 +60,8 @@ namespace WebApplication1.Models.StudentModel
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Student Code")]
         public string Code { get; set; }
 
         [Display(Name = "Academic Level")]
@@ -102,7 +105,10 @@ namespace WebApplication1.Models.StudentModel
 
 
         //Navigation Properties
+        [Display(Name ="Department")]
         public int? DepartmentID { get; set; }
+
+        [Display(Name = "Academic Advisor")]
         public int? AddvisorID{ get; set; }
 
         [ForeignKey(nameof(DepartmentID))]

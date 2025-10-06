@@ -85,7 +85,21 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Add()
+        {
+            ViewBag.DeptList = context.Departments.ToList();
+            ViewBag.AdvisorList = context.Staffs.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Student student)
+        {
+            student.ID = context.Students.ToList().Last().ID + 100;
+            context.Students.Add(student);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
-
-
 }
