@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 using System.Reflection;
+using WebApplication1.Controllers;
 using WebApplication1.Models.CourseGradeModel;
 using WebApplication1.Models.DepartmentModel;
 using WebApplication1.Models.Shared;
@@ -53,6 +55,7 @@ namespace WebApplication1.Models.StudentModel
         public int ID { get; set; }
 
         [Display(Name = "First Name")]
+        [Remote("CheckName", "StudentPortal", "Name must be one string", AdditionalFields = "LastName")]
         public string FirstName { get; set; }
 
         [Display(Name = "Middle Name (Optional)")]

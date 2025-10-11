@@ -4,6 +4,7 @@ using System.Net;
 using System.Reflection;
 using WebApplication1.Data;
 using WebApplication1.Models.StudentModel;
+using WebApplication1.Repository;
 using WebApplication1.ViewModels.StudentViewModel;
 
 namespace WebApplication1.Controllers
@@ -11,29 +12,35 @@ namespace WebApplication1.Controllers
     public class StudentPortalController : Controller
     {
 
-        DemoContext context = new DemoContext();
+        //DemoContext context = new DemoContext();
+        IStudentRepository StudentRepository;
+        IDepartmentRepository DepartmentRepository;
+        IStaffRepository StaffRepository;
+
+        public StudentPortalController(IStudentRepository studentRepository, IDepartmentRepository departmentRepository, IStaffRepository staffRepository)
+        {
+            StudentRepository = studentRepository;
+            DepartmentRepository = departmentRepository;
+            StaffRepository = staffRepository;
+        }
+
         public IActionResult Index()
         {
-            List<Student> students = context.Students.Include(std => std.Department).ToList();
+            List<Student> students = StudentRepository.GetAll();
             return View(students);
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Student std = context.Students.FirstOrDefault(st => st.ID == id);
-            context.Entry<Student>(std).Reference(st => st.Department).Load();
-            context.Entry<Student>(std).Reference(st => st.Advisor).Load();
-
+            Student std = StudentRepository.GetById(id);
             return View(std);
         }
 
         [HttpGet] 
         public IActionResult Edit(int id)
         {
-            Student std = context.Students.FirstOrDefault(st => st.ID == id);
-
-           
+            Student std = StudentRepository.GetById(id);
             return View(std);
         }
 
@@ -42,25 +49,26 @@ namespace WebApplication1.Controllers
         {
             if (student != null)
             {
-                Student std = context.Students.FirstOrDefault(s => s.ID== id);
+                //Student std = StudentRepository.GetById(id);
+                StudentRepository.Update(student);
 
-                std.FirstName = student.FirstName;
-                std.MiddleName = student.MiddleName;
-                std.LastName = student.LastName;
-                std.Level = student.Level;
-                std.Gender = student.Gender;
-                std.Nationality = student.Nationality;
-                std.BirthDate = student.BirthDate;
-                std.BirthPlace = student.BirthPlace;
-                std.City = student.City;
-                std.Address = student.Address;
-                std.HomeTele = student.HomeTele;
-                std.Mobile = student.Mobile;
-                std.Email = student.Email;
-                std.Fax = student.Fax;
-                std.MailBox = student.MailBox;
+                //std.FirstName = student.FirstName;
+                //std.MiddleName = student.MiddleName;
+                //std.LastName = student.LastName;
+                //std.Level = student.Level;
+                //std.Gender = student.Gender;
+                //std.Nationality = student.Nationality;
+                //std.BirthDate = student.BirthDate;
+                //std.BirthPlace = student.BirthPlace;
+                //std.City = student.City;
+                //std.Address = student.Address;
+                //std.HomeTele = student.HomeTele;
+                //std.Mobile = student.Mobile;
+                //std.Email = student.Email;
+                //std.Fax = student.Fax;
+                //std.MailBox = student.MailBox;
 
-                context.SaveChanges();
+                StudentRepository.Save();
 
                 return RedirectToAction("Index");
             }
@@ -71,35 +79,49 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult DeleteConfirmation(int id)
         {
-            Student std = context.Students.FirstOrDefault(st => st.ID == id);
-            context.Entry<Student>(std).Reference(s => s.Department).Load();
+            Student std = StudentRepository.GetById(id);
             return View(std);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Student std = context.Students.FirstOrDefault(s => s.ID == id);
-            context.Students.Remove(std);
-            context.SaveChanges();
+            StudentRepository.Delete(id);
+            StudentRepository.Save();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.DeptList = context.Departments.ToList();
-            ViewBag.AdvisorList = context.Staffs.ToList();
+            ViewBag.DeptList = DepartmentRepository.GetAll();
+            ViewBag.AdvisorList = StaffRepository.GetAll();
             return View();
         }
 
         [HttpPost]
         public IActionResult Add(Student student)
         {
-            student.ID = context.Students.ToList().Last().ID + 100;
-            context.Students.Add(student);
-            context.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                student.ID = StudentRepository.GetLastStudent().ID + 100;
+                StudentRepository.Add(student);
+                StudentRepository.Save();
+            }
+
             return RedirectToAction("Index");
+        }
+
+        // Remote Attribute using Ajax call
+        [HttpGet]
+        public IActionResult CheckName(string name)
+        {
+            if (name.Contains(' '))
+            {
+                return Json(true);
+            }
+            return Json(false);
         }
     }
 }
